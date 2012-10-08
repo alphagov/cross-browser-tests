@@ -19,11 +19,18 @@ def browser
   ENV["BROWSER"] || "selenium"
 end
 
+def authentication_prefix
+  if user_name && password
+    return "#{user_name}:#{password}@"
+  end
+  return ""
+end
+
 def base_url
   if target_platform == "production"
     "https://www.gov.uk"
   else
-    "https://#{user_name}:#{password}@www.#{target_platform}.alphagov.co.uk"
+    "https://#{authentication_prefix}www.#{target_platform}.alphagov.co.uk"
   end
 end
 
