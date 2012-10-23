@@ -2,9 +2,11 @@ require 'capybara'
 require 'capybara/dsl'
 require 'capybara/rspec'
 require 'rspec'
+require "uri"
+require "net/http"
 
 def target_platform
-  ENV["TARGET_PLATFORM"] || "preview"
+  ENV["TARGET_PLATFORM"] || "dev"
 end
 
 def user_name
@@ -74,4 +76,43 @@ def find_and_press_link(text, sleep_after=1)
   anchor.native.send_keys([:return])
   sleep(sleep_after)
   href
+end
+
+module GoogleAnalytics
+  def self.clear
+    request = Net::HTTP::Delete.new('/')
+    http.request(request)
+  end
+
+  def self.fetch_events
+    request = Net::HTTP::Get.new('/events')
+    response = http.request(request)
+
+    JSON.parse(response.body)
+  end
+
+  private
+  def self.http
+    Net::HTTP.new("www.google-analytics.com")
+  end
+end
+
+RSpec::Matchers.define :include_entry_for do |need|
+  match do |events|
+    events.any? { |event|
+      event['event'] == 'Entry' and
+          event['format'] == need[:format] and
+          event['need_id'] == need[:need_id]
+    }
+  end
+end
+
+RSpec::Matchers.define :include_success_for do |need|
+  match do |events|
+    events.any? { |event|
+      event['event'] == 'Success' and
+          event['format'] == need[:format] and
+          event['need_id'] == need[:need_id]
+    }
+  end
 end
