@@ -22,7 +22,6 @@ describe "answer success tracking" do
   before(:each) do
     GoogleAnalytics.clear
     visit ELECTORAL_ANSWER[:path]
-    dismiss_popup
   end
 
   it "should track an entry event" do

@@ -5,15 +5,14 @@
 # Total Success Logs: 2
 
 require_relative "../../spec_helper"
-require "uri"
 
 GUIDE_PATH = "/transport-disabled"
 
 describe "guide success tracking" do
   before(:each) do
     visit GUIDE_PATH
-    dismiss_popup
   end
+
   it "should show the guide page" do
     current_path.should == GUIDE_PATH
   end

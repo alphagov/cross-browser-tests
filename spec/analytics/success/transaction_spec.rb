@@ -5,14 +5,12 @@
 # Total Success Logs: 2
 
 require_relative "../../spec_helper"
-require "uri"
 
 TRANSACTION_PATH = "/apply-blue-badge"
 
 describe "transaction success tracking" do
   before(:each) do
     visit TRANSACTION_PATH
-    dismiss_popup
   end
 
   it "should show the transaction page" do

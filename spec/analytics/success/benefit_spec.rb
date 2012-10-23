@@ -5,15 +5,14 @@
 # Total Success Logs: 2
 
 require_relative "../../spec_helper"
-require "uri"
 
 BENEFIT_PATH = "/legal-aid"
 
 describe "benefit success tracking" do
   before(:each) do
     visit BENEFIT_PATH
-    dismiss_popup
   end
+
   it "should show the benefit page" do
     current_path.should == BENEFIT_PATH
   end
