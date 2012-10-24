@@ -20,7 +20,7 @@ describe "benefit success tracking" do
 
   it "should track an entry event" do
     events = GoogleAnalytics.fetch_events
-    events.should have(1).item
+    events.should have(1).item, "but was #{events.inspect}"
     events.should include_entry_for(BENEFIT_LEGAL_AID)
   end
 
@@ -37,7 +37,7 @@ describe "benefit success tracking" do
     current_path.should == URI.parse(href).path
 
     events = GoogleAnalytics.fetch_events
-    events.should have(2).item
+    events.should have(2).item, "but was #{events.inspect}"
     events.should include_success_for(BENEFIT_LEGAL_AID)
   end
 
@@ -50,7 +50,7 @@ describe "benefit success tracking" do
     current_path.should == URI.parse(href).path
 
     events = GoogleAnalytics.fetch_events
-    events.should have(2).item
+    events.should have(2).item, "but was #{events.inspect}"
     events.should include_success_for(BENEFIT_LEGAL_AID)
   end
 
@@ -59,7 +59,7 @@ describe "benefit success tracking" do
     current_url.should == href
 
     events = GoogleAnalytics.fetch_events
-    events.should have(1).item
+    events.should have(1).item, "but was #{events.inspect}"
   end
 
   it "should allow pressing return on an external link" do
@@ -67,14 +67,14 @@ describe "benefit success tracking" do
     current_url.should == href
 
     events = GoogleAnalytics.fetch_events
-    events.should have(1).item
+    events.should have(1).item, "but was #{events.inspect}"
   end
 
   it "should fire a success after 7 seconds" do
     sleep(7)
 
     events = GoogleAnalytics.fetch_events
-    events.should have(2).item
+    events.should have(2).item, "but was #{events.inspect}"
     events.should include_success_for(BENEFIT_LEGAL_AID)
   end
 end

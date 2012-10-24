@@ -20,7 +20,7 @@ describe "transaction success tracking" do
 
   it "should track an entry event" do
     events = GoogleAnalytics.fetch_events
-    events.should have(1).item
+    events.should have(1).item, "but was #{events.inspect}"
     events.should include_entry_for(APPLY_BLUE_BADGE_TRANSACTION)
   end
 
@@ -33,7 +33,7 @@ describe "transaction success tracking" do
     current_path.should == URI.parse(href).path
 
     events = GoogleAnalytics.fetch_events
-    events.should have(2).item
+    events.should have(2).item, "but was #{events.inspect}"
     events.should include_success_for(APPLY_BLUE_BADGE_TRANSACTION)
   end
 
@@ -41,7 +41,7 @@ describe "transaction success tracking" do
     href = find_and_click_link("Start now")
 
     events = GoogleAnalytics.fetch_events
-    events.should have(1).item
+    events.should have(1).item, "but was #{events.inspect}"
   end
 
   it "should allow pressing return on an internal link" do
@@ -51,7 +51,7 @@ describe "transaction success tracking" do
     current_path.should == URI.parse(href).path
 
     events = GoogleAnalytics.fetch_events
-    events.should have(2).item
+    events.should have(2).item, "but was #{events.inspect}"
     events.should include_success_for(APPLY_BLUE_BADGE_TRANSACTION)
   end
 
@@ -62,7 +62,7 @@ describe "transaction success tracking" do
     current_url.should == href
 
     events = GoogleAnalytics.fetch_events
-    events.should have(1).item
+    events.should have(1).item, "but was #{events.inspect}"
   end
 end
 
