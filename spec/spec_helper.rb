@@ -34,6 +34,7 @@ end
 def wait_until_page_loaded
   begin
     wait_until { page.evaluate_script('jQuery.active') == 0 }
+		sleep(0.5) # 500ms to read cookies and send events
   rescue Selenium::WebDriver::Error::JavascriptError
     # Thrown if JQuery is not present
     # We include JQuery on _any_ GOV.UK page
