@@ -10,7 +10,7 @@ def browser
 end
 
 def base_url
-    "http://www.dev.gov.uk"
+  "http://www.dev.gov.uk"
 end
 
 Capybara.register_driver :chrome do |app|
@@ -31,19 +31,27 @@ RSpec.configure do |config|
   config.include Capybara::DSL
 end
 
-def find_and_click_link(text)
-  anchor = find_link(text)
-  href = anchor["href"]
-  anchor.click
-  href
+def wait_until_page_loaded
+  begin
+    wait_until { page.evaluate_script('jQuery.active') == 0 }
+  rescue Selenium::WebDriver::Error::JavascriptError
+    # Thrown if JQuery is not present
+    # We include JQuery on _any_ GOV.UK page
+    # On external pages, we don't care if JavaScript has run
+    wait_until { page.has_content? '' }
+  end
 end
 
-def find_and_press_link(text, sleep_after=1)
+def find_and_click_link(text)
   anchor = find_link(text)
-  href = anchor["href"]
+  anchor.click
+  wait_until_page_loaded()
+end
+
+def find_and_press_link(text)
+  anchor = find_link(text)
   anchor.native.send_keys([:return])
-  sleep(sleep_after)
-  href
+  wait_until_page_loaded
 end
 
 module GoogleAnalytics

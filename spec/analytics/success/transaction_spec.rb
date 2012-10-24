@@ -29,8 +29,7 @@ describe "transaction success tracking" do
   end
 
   it "should allow clicking an internal link" do
-    href = find_and_click_link("your local council")
-    current_path.should == URI.parse(href).path
+    find_and_click_link("your local council")
 
     events = GoogleAnalytics.fetch_events
     events.should have(2).item, "but was #{events.inspect}"
@@ -38,17 +37,14 @@ describe "transaction success tracking" do
   end
 
   it "should allow clicking an external link" do
-    href = find_and_click_link("Start now")
+    find_and_click_link("Start now")
 
     events = GoogleAnalytics.fetch_events
     events.should have(1).item, "but was #{events.inspect}"
   end
 
   it "should allow pressing return on an internal link" do
-    href = find_and_press_link("your local council")
-    # need to wait for browser to catch up
-    sleep(1)
-    current_path.should == URI.parse(href).path
+    find_and_press_link("your local council")
 
     events = GoogleAnalytics.fetch_events
     events.should have(2).item, "but was #{events.inspect}"
@@ -56,10 +52,7 @@ describe "transaction success tracking" do
   end
 
   it "should allow pressing return on an external link" do
-    href = find_and_press_link("Track your Blue Badge application.")
-    # need to wait for browser to catch up
-    sleep(5)
-    current_url.should == href
+    find_and_press_link("Track your Blue Badge application.")
 
     events = GoogleAnalytics.fetch_events
     events.should have(1).item, "but was #{events.inspect}"

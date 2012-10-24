@@ -29,12 +29,10 @@ describe "guide success tracking" do
   end
 
   it "should allow clicking an internal link" do
-    href = find_and_click_link("Planes")
-    current_path.should == URI.parse(href).path
+    find_and_click_link("Planes")
 
     # click the first again, this should not cause another success
-    href = find_and_click_link("Trains")
-    current_path.should == URI.parse(href).path
+    find_and_click_link("Trains")
 
     events = GoogleAnalytics.fetch_events
     events.should have(2).item, "but was #{events.inspect}"
@@ -42,12 +40,10 @@ describe "guide success tracking" do
   end
 
   it "should allow pressing return on an internal link" do
-    href = find_and_press_link("Planes", 1)
-    current_path.should == URI.parse(href).path
+    find_and_press_link("Planes")
 
     # press the first again, this should not cause another success
-    href = find_and_press_link("Trains", 1)
-    current_path.should == URI.parse(href).path
+    find_and_press_link("Trains")
 
     events = GoogleAnalytics.fetch_events
     events.should have(2).item, "but was #{events.inspect}"
@@ -55,8 +51,7 @@ describe "guide success tracking" do
   end
 
   it "should allow clicking on an external link" do
-    href = find_and_click_link("National Rail")
-    current_url.should == href
+    find_and_click_link("National Rail")
 
     # Are not tracked currently
     events = GoogleAnalytics.fetch_events
@@ -64,8 +59,7 @@ describe "guide success tracking" do
   end
 
   it "should allow pressing return on an external link" do
-    href = find_and_press_link("National Rail", 5)
-    current_url.should == href
+    find_and_press_link("National Rail")
 
     # Are not tracked currently
     events = GoogleAnalytics.fetch_events

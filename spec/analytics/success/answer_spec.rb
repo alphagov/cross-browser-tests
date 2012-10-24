@@ -35,8 +35,7 @@ describe "answer success tracking" do
   end
 
   it "should allow clicking an internal link" do
-    href = find_and_click_link("your local authority")
-    current_path.should == URI.parse(href).path
+    find_and_click_link("your local authority")
 
     events = GoogleAnalytics.fetch_events
     events.should have(3).item, "but was #{events.inspect}"
@@ -45,8 +44,7 @@ describe "answer success tracking" do
   end
 
   it "should allow pressing return on an internal link" do
-    href = find_and_press_link("your local authority", 1)
-    current_path.should == URI.parse(href).path
+    find_and_press_link("your local authority")
 
     events = GoogleAnalytics.fetch_events
     events.should have(3).item, "but was #{events.inspect}"
@@ -55,8 +53,7 @@ describe "answer success tracking" do
   end
 
   it "should allow clicking on an external link" do
-    href = find_and_click_link("Register to vote")
-    current_url.should == href
+    find_and_click_link("Register to vote")
 
     # Are not tracked currently
     events = GoogleAnalytics.fetch_events
@@ -64,8 +61,7 @@ describe "answer success tracking" do
   end
 
   it "should allow pressing return on an external link" do
-    href = find_and_press_link("Register to vote", 5)
-    current_url.should == href
+    find_and_press_link("Register to vote")
 
     # Are not tracked currently
     events = GoogleAnalytics.fetch_events
