@@ -79,7 +79,7 @@ RSpec::Matchers.define :include_entry_for do |need|
     events.any? { |event|
       event['event'] == 'Entry' and
           event['format'] == need[:format] and
-          event['need_id'] == need[:need_id]
+          event['slug'] == need[:slug]
     }
   end
 end
@@ -89,7 +89,7 @@ RSpec::Matchers.define :include_success_for do |need|
     events.any? { |event|
       event['event'] == 'Success' and
           event['format'] == need[:format] and
-          event['need_id'] == need[:need_id]
+          event['slug'] == need[:slug]
     }
   end
 end

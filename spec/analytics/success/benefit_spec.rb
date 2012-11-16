@@ -9,7 +9,7 @@ require_relative "../../spec_helper"
 BENEFIT_LEGAL_AID = {
     :path => "/legal-aid",
     :format => "MS_programme",
-    :need_id => "620"
+    :slug => "legal-aid"
 }
 
 describe "benefit success tracking" do

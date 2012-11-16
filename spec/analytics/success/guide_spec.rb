@@ -9,7 +9,7 @@ require_relative "../../spec_helper"
 TRANSPORT_DISABLED_GUIDE = {
     :path => "/transport-disabled",
     :format => "MS_guide",
-    :need_id => "1385"
+    :slug => "transport-disabled"
 }
 
 describe "guide success tracking" do

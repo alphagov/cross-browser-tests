@@ -9,7 +9,7 @@ require_relative "../../spec_helper"
 APPLY_BLUE_BADGE_TRANSACTION = {
     :path => "/apply-blue-badge",
     :format => "MS_transaction",
-    :need_id => "1617"
+    :slug => "apply-blue-badge"
 }
 
 describe "transaction success tracking" do

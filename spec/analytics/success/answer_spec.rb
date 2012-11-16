@@ -9,12 +9,12 @@ require_relative "../../spec_helper"
 ELECTORAL_ANSWER = {
     :path => "/electoral-register",
     :format => 'MS_answer',
-    :need_id => '1877'
+    :slug => 'electoral-register'
 }
 
 LOCAL_AUTHORITY_TRANSACTION = {
     :format => 'MS_transaction',
-    :need_id => '692'
+    :slug => 'register-to-vote'
 }
 
 
