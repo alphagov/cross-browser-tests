@@ -27,4 +27,9 @@ STATIC_DEV=http://static.dev.gov.uk bowl frontend whitehall
 
 # Run
 
-    bundle exec rake spec
+`bundle exec rake spec`
+
+To select the browser to use set a `BROWSER` environment variable. Available options are `firefox`, `chrome`, `IE`.
+
+`BROWSER=chrome bundle exec rake spec`
+
