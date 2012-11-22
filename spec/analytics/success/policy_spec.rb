@@ -86,4 +86,12 @@ describe "policy success tracking" do
     events.should include_success_for(DECENTRALISING_POWER_POLICY)
     events.should include_entry_for(COMMUNITIES_TOGETHER_NOT_APART_POLICY)
   end
+
+  it "should fire a success after 30 seconds" do
+    sleep(30)
+
+    events = GoogleAnalytics.fetch_events
+    events.should have(2).item, "but was #{events.inspect}"
+    events.should include_success_for(DECENTRALISING_POWER_POLICY)
+  end
 end

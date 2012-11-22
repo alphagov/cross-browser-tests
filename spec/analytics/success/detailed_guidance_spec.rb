@@ -62,4 +62,12 @@ describe "detailed guidance success tracking" do
     events = GoogleAnalytics.fetch_events
     events.should have(1).item, "but was #{events.inspect}"
   end
+
+  it "should fire a success after 30 seconds" do
+    sleep(30)
+
+    events = GoogleAnalytics.fetch_events
+    events.should have(2).item, "but was #{events.inspect}"
+    events.should include_success_for(USING_TRACES_DETAILED_GUIDANCE)
+  end
 end
