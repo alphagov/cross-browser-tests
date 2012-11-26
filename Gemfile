@@ -1,5 +1,5 @@
 source "http://rubygems.org"
 
 gem "rake"
-gem "capybara"
+gem "capybara", "~> 1.1.3"
 gem "rspec"
